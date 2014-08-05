@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div id ="test">TODO write content</div>
+        
+          <script type="text/javascript">
+            
+            var tester = document.getElementById('test');
+            
+            tester.innerHTML = '<p> wow it changed</p>';
+            tester.style.border = '10px solid blue';
+            tester.style.borderTop = '10px solid red';
+            
+            //document.URL
+            //document.title
+            console.log(document.URL);
+            console.log(document.title);
+            document.title = 'This is my page';
+            
+            function changeDocumentTitle(str){ //str becomes a usable variable inside the function only
+                document.title = str;
+            }
+            
+            changeDocumentTitle('my page TITLE');
+            
+          </script>
+    </body>
+</html>
