@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -12,10 +8,47 @@ and open the template in the editor.
     </head>
     <body>
         <div>TODO write content</div>
-        
-        <script type=" text/javascript">
+        <input type="button" id="btn" value="submit" />
+                
+        <script type="text/javascript">
+            var submitBtn = document.getElementById('btn');
+                //submitBtn.addEventListener('click', changeBGColor);
+                //submitBtn.addEventListener('click', submitForm);
+                submitBtn.addEventListener('click', call1);
+                submitBtn.addEventListener('click', call2);
             
+            function call1 (e){
+                console.log(e);
+            }
+            function call2 (){
+                console.log('call 2');
+            }
             
+            function submitForm(){
+                console.log('submitted');
+            }
+            
+            var data = {
+                 "hello" : 'Hey hows it going',
+                 "callme" : false
+                };
+                 
+                 console.log(data.hello);
+                 
+                 function changeBGColor (){
+                     if ( document.body.style.backgroundColor === 'black'){
+                        document.body.style.backgroundColor = 'white'; 
+                     } else {
+                         
+                         document.body.style.backgroundColor = 'black';
+                     }
+                }
+                
+                //changeBGColor():
+                        
+                     //document.addEventListener('mousemove', changeBGColor);
+                     //document.addEventListener('click', changeBGColor);
+                     //window.addEventListener('resize', changeBGColor);
         </script>
                 
     </body>
