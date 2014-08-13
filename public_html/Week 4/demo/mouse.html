@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+take email and make it so when you blur out the field it uses a function saves the information into data.email
 -->
 <html>
     <head>
@@ -14,20 +12,33 @@ and open the template in the editor.
         <div>TODO write content</div>
         <input type="text" id= "email" value ="" />
         
-        <script type=text/javascript">
-        
+        <script type="text/javascript">
+            var email = document.getElementById('email');
+                email.addEventListener('blur', saveEmail);
+            function saveEmail() {
+                data.email =  email.value;
+            }
+            
             var data = {
-                "mouseX" : [],
-                "email" : value
+              "mouseX" : [],
+              "email" : ''
             };
-    
+            
             function trackMouse(e) {
                 data.mouseX.push(e.clientX);
+                console.log(e.clientX);
+                
+                if ( data.mouseX.length > 100 ) {
+                    document.removeEventListener('mousemove', trackMouse);
+                }
+                
             }
-    
-    </script>
-    
-    
-    
+            
+            
+            document.addEventListener('mousemove', trackMouse);
+            
+            
+        </script>
+        
     </body>
 </html>
