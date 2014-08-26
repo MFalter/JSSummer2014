@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Week 6 Lab </title>
+        <style type="text/css">
+            .contentBox {
+                width: 300px;
+                margin: 1em;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+
+	<div id="content" class="contentBox"></div>
+
+	<input type="button" id="showResults" value="Show Results" />
+
+	<script type="text/javascript">
+
+		 //http://canvas.site40.net/demopage.html	
+		// XML HTTP Request
+		var xhr = new XMLHttpRequest();  // required to get an AJAX object
+                                                 // starts AJAX request
+		var content = document.getElementById('content');  
+		var showResults = document.getElementById('showResults');  
+		var url = "demo.php?page="; // The URL we will be accessing with room for a page number
+                var step = 1;
+		
+                showResults.addEventListener('click',makeAJAXCall);  // When "Show Results button is clicked, the fuctin is called.
+		
+		function callback() 
+                {
+			var response = xhr.responseText;  // What is saves the data in to.  All data it got from the server.
+						
+			content.innerHTML += response; // Adds the data to all ready displayed HTML
+                        step++;                      // Adds 1 to the step.  
+                                                    //The makeAJAXCall function only goes while step < 5
+                }
+		
+		
+		xhr.onreadystatechange = function() // This is the one you'll always want to overwrite.
+                { 						
+		   if (xhr.readyState==4 && xhr.status==200)  // if the conditions are met, continue to the callback
+                   {  
+			callback();  // callback- programming technique, what you want the program to do once it is done.   
+                                     // Handles response back.
+                                     // Returns gathered information to the user.
+		   } 
+		};  
+		
+		
+                function makeAJAXCall() // The function calling a loop
+                {
+                    if ( step < 5 ) // Initially, the step is equal to 1 so it will automatically enter.
+                    {                      
+                        xhr.open('GET', url+step, true);  // What to do on open
+                                                 //'GET; passes it through a url
+                                                 // url+step combines the variable url + the current step number to create
+                                                 // the entire page url
+                                                 // passes it through
+                        xhr.send();     // sends to xhr.onreadystatechange = function()
+                    }
+                }
+                
+		window.addEventListener('load', makeAJAXCall); // As soon as the page loads, it begins the makeAJAXCall function.
+
+                function scrollCheck() 
+                {
+                    if ( (window.innerHeight + window.scrollY) >= document.body.offsetHeight) // Keeps track of the position of the scroll
+                                // bar and records it as window height.  As long as it hasn't reached the bottom, the makeAJAXCall function will run.
+                    {				
+			makeAJAXCall();
+                    }
+		}
+		
+		window.addEventListener("scroll", scrollCheck); //Continuously checks the scroll bar position as user scrolls.
+		
+	
+	</script>
+    </body>
+</html>
