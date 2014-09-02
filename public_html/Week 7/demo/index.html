@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            div {border: 1px solid black;}
+        </style>
+    </head>
+    <body>
+        <div id="test1">TODO write content1</div>
+        <div class="test2">TODO write content2</div>
+        <div class="test2">TODO write content3</div>
+        
+        
+        <script type="text/javascript" src="jquery2.1.1.js"></script>
+        <script type="text/javascript">
+        
+            //document.querySelector()
+        
+            $('#test1').click(function(){
+                $(this).fadeToggle('slow', null, cb);
+            });
+            
+            function cb()
+            {
+                $('div').css("background-color", 'red')
+                .animate(
+                    {
+                        width: "70%",
+                        opacity: 0.4,
+                        marginLeft: "0.6in",
+                        fontSize: "3em",
+                        borderWidth: "10px"    
+                    }, 2000
+                );
+            }
+        
+    </script>
+    </body>
+</html>
