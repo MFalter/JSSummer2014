@@ -9,15 +9,13 @@
         
         <script type="text/javascript">
             
-            
             var clock = document.getElementById('clock');
             var clockTimer = setTimeout(updateClock, 1000);
             
-            
-            
             function updateClock()
             {
-                clock.innerHTML = new Date();
+                var newDate = new Date();
+                clock.innerHTML = newDate;
                 setTimeout(updateClock, 1000);
             }
             

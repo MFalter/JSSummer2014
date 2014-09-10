@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #test 
+            {
+                border: 5px solid black;
+                position : absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div id = "test"> I'M OUTTA HERE!</div>
+        <br clear ="all">
+        <br clear ="all">
+        <button id="fadeIn"> Fade In </button>
+        <button id="fadeOut"> Fade Out </button>
+        <button id="moveDiv"> Move Div </button>
+        <script type="text/javascript">
+            /*
+             * 1. Create a new Lab8.html file under your week 8 folder.  
+                    Create a Div and 3 buttons on the page.
+                    Button 1: Fade in
+                    Button 2: Fade out
+                    Button 3: Move Div
+                    Make sure to give the buttons ID's so you can add an event handler to them.
+
+               2. Create an alert message using the alert function
+                    (alert is a built in JavaScript global function) 
+                    that will display after the page has been open for 5 seconds.
+                    use alert('hi');
+
+               3. Use a timer to run a function that will fade out a div.
+                    hint: Elem.style.opacity
+                    opacity can only take a number between 0 and 1
+                    To make it simple it should fade in only 10 steps.
+                    10 / 100
+
+               4. Create another function that will fade in the same div.
+                    Hint: you should cancel the previous timer before starting this one
+
+               5.  Create a function that will move the div across the screen.
+                    hint:  Set the div to be "position: absolute;" in CSS.  
+                    in JavaScript you can update the elem.style.left property
+                    to increase the position by 10 pixels each time it's run.
+                    e.g.
+                    var divPosLeft = 0;
+
+                    divPosLeft = divPosLeft + 10;
+                    elem.style.left = divPosLeft+"px";
+             * 
+             */
+
+            // Grab elements by ID
+            var div = document.getElementById('test'); 
+            var fadeIn = document.getElementById('fadeIn');
+            var fadeOut = document.getElementById('fadeOut');
+            var move = document.getElementById('moveDiv');
+            
+            // Set control variables
+            var startOpacity = 1;
+            var opacityTimer;  // Global variable
+            var divPosLeft = 0;
+            var movetimer;
+            
+            // Add event handlers
+            fadeIn.addEventListener('click', startFadeIn);
+            fadeOut.addEventListener('click', startFadeOut);
+            move.addEventListener('click', moveDivOver)
+
+            function alertMessage()
+            {
+                alert('hi');
+            }
+            
+            setTimeout(alertMessage, 5000);
+
+            // When the Fade In button is clicked
+            function startFadeIn()
+            {
+                opacityTimer = setInterval(FadeOpacityIn, 200);
+            }
+            
+            function FadeOpacityIn() 
+            {
+                startOpacity++;
+                div.style.opacity = (startOpacity / 10); // To combine it in to pixels for CSS
+                                
+                if (startOpacity > 10)
+                {
+                    clearInterval(opacityTimer);
+                }
+            }
+            
+            
+            // When the Fade OUt button is clicked
+            function startFadeOut()
+            {
+                opacityTimer = setInterval(FadeOpacityOut, 200);
+            }
+            
+            function FadeOpacityOut() 
+            {
+                startOpacity--;
+                div.style.opacity = (startOpacity / 10); // To combine it in to pixels for CSS
+                                
+                if (startOpacity < 1)
+                {
+                    clearInterval(opacityTimer);
+                }
+            }
+            
+            function moveDivOver()
+            {
+                movetimer =  setTimeout(moveTimer, 20);
+            }
+            
+            function moveTimer()
+            {
+                divPosLeft = divPosLeft + 10;
+                div.style.left = divPosLeft+"px";
+                if (divPosLeft < (window.innerWidth - 160)) // Stop at the end of the window
+                {
+                    setTimeout(moveTimer, 20);
+                }
+                else 
+                {
+                    clearTimeout(movetimer);
+                }
+            }
+            
+        </script>
+    </body>
+</html>

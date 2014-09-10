@@ -19,9 +19,38 @@
              * 
              * Add the function even handler to the #borderBtn to
              * start the function
-             * 
+             *
              * */
             
+            
+            // First thing, grab elements.
+            var div = document.getElementById('test'); 
+            var btn = document.getElementById('borderBtn');
+            
+            var borderSize = 1;
+            var borderTimer;  // Global variable
+            
+            btn.addEventListener('click', startTimer);
+
+            function startTimer()
+            {
+                borderTimer = setInterval(updateBorder, 200);
+            }
+            
+            // Then create a function to update them.
+            function updateBorder() 
+            {
+                borderSize++;
+                div.style.borderRadius = borderSize + 'px'; // To combine it in to pixels for CSS
+                
+                if (borderSize > 20)
+                {
+                    clearInterval(borderTimer);
+                }
+            }
+            
+            
+
         </script>
         
     </body>
