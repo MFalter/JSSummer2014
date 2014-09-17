@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab 9</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style type="text/css">
+            canvas 
+            {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <canvas id="race" width="750" height="150"></canvas>
+        <br />
+        <button id="play">Play</button>
+        
+        <script type="text/javascript">
+            /*
+                We will be creating a canvas race game. We will have two teams, one red and the other blue, that will race to the finish line.
+
+                Using Canvas create two rectangles, one red and the other blue. They should be the same width and height. 
+                When moving the rectangles make sure to generate a random number to move the x position of each rectangle. 
+                The minimum should always be greater than zero. It should be called twice to get a unique number for each rectangle. 
+                Once the rectangle reaches the finish line, display the winner. A play button should appear to reset the race. 
+                Once the race is started the play button should be hidden again.
+             */
+            
+            // Grab and declare variables
+            var can = document.getElementById('race');
+            var ctx = can.getContext('2d');
+            
+            var start = document.getElementById('play');
+            
+            // Set starting positions for red and blue "cars"
+            var xred = 20,
+                xblue = 20;
+            
+            // Draw the "cars"
+            drawRed();
+            drawBlue();
+            
+            // Creates red car
+            function drawRed()
+            {
+            ctx.fillStyle = "red";
+            ctx.fillRect(xred,20,40,20); //x,y,width,height
+            xred += randNum(20); // Call random number generator
+            }
+            
+            // Creates blue car
+            function drawBlue()
+            {
+            ctx.fillStyle = "blue";
+            ctx.fillRect(xblue,50,40,20); //x,y,width,height
+            xblue += randNum(20); // Call random number generator
+            }
+            
+            // When you click "play", the race starts (moveBoxes function called)
+            play.addEventListener('click', moveBoxes);
+            
+            // Using the random number generator, the x position is changed for each car until the finish line
+            function moveBoxes()
+            {
+                drawRed();
+                drawBlue();
+                document.getElementById('play').style.visibility = 'hidden';  // Hides play button
+                if (xblue < (can.width - 100) && xred < (can.width - 100)) // The finish line set at width - 100
+                {
+                    drawClear();
+                    drawRed();
+                    drawBlue();
+                    setTimeout(moveBoxes, 50); // Repositions the cars/boxes ever 50 miliseconds
+                }
+                else if (xblue >= (can.width - 100))
+                {
+                    ctx.fillStyle = "blue";
+                    ctx.font = "16pt Helvetica";
+                    ctx.fillText("Blue Wins!", 150, can.height-10); //Declares winner
+                    document.getElementById('play').style.visibility = 'visible'; // Shows play button
+                    xblue = 20; // Resets starting positions
+                    xred = 20;
+                }
+                else
+                {
+                    ctx.fillStyle = "red";
+                    ctx.font = "16pt Helvetica";
+                    ctx.fillText("Red Wins!", 150, can.height-10); //Declares winner
+                    document.getElementById('play').style.visibility = 'visible'; // Show play button
+                    xblue = 20; // Reset starting positions
+                    xred = 20;
+                }
+            }
+            
+            function drawClear()
+            {
+                ctx.clearRect(0,0,can.width,can.height); // Clears previously drawn boxes to create moving effect
+            }
+
+           function randNum(max) 
+           {
+               return Math.ceil(Math.random()*max) + 1; // Random number generator
+           }
+        </script>
+    </body>
+</html>
