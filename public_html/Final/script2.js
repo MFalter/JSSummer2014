@@ -27,12 +27,12 @@ function strip_HTML(str) {
     var phoneNumErr = document.getElementById("phone_err"); 
     var description = document.getElementById("description");
     var descriptionErr = document.getElementById("description_err");
-    var hasErrors = false;
     var mydata = [];
     
 function submitForm() 
 {
     console.clear();
+    var hasErrors = false;
     var userData = // creating a JSON to store variable data in arrays
     {
      "Name" : "",
