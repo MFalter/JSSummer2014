@@ -192,13 +192,15 @@ function submitForm()
             email.value = ' ';
             phone.value = ' ';
             description.value = ' ';
+            
        }
 }
 
-// Clear local storage when the button is clicked
+// Clear local storage and table when the button is clicked
 function clearFormInfo()
 {
-    localStorage.clear();       
+    localStorage.clear();
+    document.getElementById("tableData").innerHTML = "";
 }
 
 // Deletes last item in the table
